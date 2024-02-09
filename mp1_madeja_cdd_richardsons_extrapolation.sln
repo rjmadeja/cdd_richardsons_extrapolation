@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "mp1_madeja_cdd_richardsons_extrapolation", "mp1_madeja_cdd_richardsons_extrapolation\mp1_madeja_cdd_richardsons_extrapolation.pyproj", "{B01432F6-32BC-4A05-ACC8-1CC84B5C4FB4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B01432F6-32BC-4A05-ACC8-1CC84B5C4FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B01432F6-32BC-4A05-ACC8-1CC84B5C4FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C8D74C90-A389-4DFE-912E-BC240729B9CD}
+	EndGlobalSection
+EndGlobal

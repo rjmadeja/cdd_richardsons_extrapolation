@@ -1,0 +1,77 @@
+import math
+
+def cdd_richardsons_extrapolation_main():
+    # Input
+    f_of_x = input("Enter the function f(x): ")
+    xi = float(input("Enter the value of xi: "))
+    h1 = float(input("Enter the larger spacing h1: "))
+    h2 = float(input("Enter the smaller spacing h2: "))
+    dp = int(input("Enter the desired decimal places for rounding off: "))
+
+    # Computations
+    # Remove unnecessary spaces and replace special notations
+    function_str = f_of_x.replace(" ", "")
+    function_str = function_str.replace('^', '**')
+    function_str = function_str.replace('sqrt', 'math.sqrt')
+    function_str = function_str.replace('sin', 'math.sin')
+    function_str = function_str.replace('cos', 'math.cos')
+    function_str = function_str.replace('tan', 'math.tan')
+    function_str = function_str.replace('ln', 'math.log')
+    function_str = function_str.replace('log', 'math.log10')
+    function_str = function_str.replace('e', 'math.e')
+    function_str = function_str.replace('exp', 'math.exp')
+    function_str = function_str.replace('csc', '1/math.sin')
+    function_str = function_str.replace('sec', '1/math.cos')
+    function_str = function_str.replace('cot', '1/math.tan')
+
+    # Define the lambda function
+    f = lambda x: round(eval(function_str, {'x': x, 'math': math, 'sin': math.sin, 'cos': math.cos, 'tan': math.tan, 'log': math.log, 'log10': math.log10, 'e': math.e, 'exp': math.exp, 'csc': lambda x: 1/math.sin(x), 'sec': lambda x: 1/math.cos(x), 'cot': lambda x: 1/math.tan(x)}), dp)
+
+    xi_plus = xi + h1
+    xi_minus = xi - h1
+    
+    xi_plus_h2 = xi + h2
+    xi_minus_h2 = xi - h2
+    
+    def finite_difference(xi_plus, xi_minus, h):
+        return (f(xi_plus) - f(xi_minus)) / (2 * h)
+    
+    D_h1 = finite_difference(xi_plus, xi_minus, h1)
+    D_h2 = finite_difference(xi_plus_h2, xi_minus_h2, h2)
+    
+    def richardson_extrapolation(D_h1, D_h2):
+        return ((4/3) * D_h2) - ((1/3) * D_h1)
+    
+    D = richardson_extrapolation(D_h1, D_h2)
+
+    # Output
+    # Format rounded values with desired number of decimal places
+    xi_plus_rounded = "{:.{}f}".format(xi_plus, dp)
+    xi_plus_h2_rounded = "{:.{}f}".format(xi_plus_h2, dp)
+    xi_rounded = "{:.{}f}".format(xi, dp)
+    xi_minus_rounded = "{:.{}f}".format(xi_minus, dp)
+    xi_minus_h2_rounded = "{:.{}f}".format(xi_minus_h2, dp)
+    f_xi_plus_rounded = "{:.{}f}".format(f(xi_plus), dp)
+    f_xi_plus_h2_rounded = "{:.{}f}".format(f(xi_plus_h2), dp)
+    f_xi_rounded = "{:.{}f}".format(f(xi), dp)
+    f_xi_minus_rounded = "{:.{}f}".format(f(xi_minus), dp)
+    f_xi_minus_h2_rounded = "{:.{}f}".format(f(xi_minus_h2), dp)
+    
+    # Format truncated derivatives with desired number of decimal places
+    D_h1_rounded = "{:.{}f}".format(D_h1, dp)
+    D_h2_rounded = "{:.{}f}".format(D_h2, dp)
+    D_rounded = "{:.{}f}".format(D, dp)
+    
+    print("\nTabulated Results:")
+    print("{:<10} | {:<15} | {:<10} | {:<15}".format("x (h1)", "f(x) (h1)", "x (h2)", "f(x) (h2)"))
+    print("-" * 55)  # Separator line
+    print("{:<10} | {:<15} | {:<10} | {:<15}".format(xi_plus_rounded, f_xi_plus_rounded, xi_plus_h2_rounded, f_xi_plus_h2_rounded))
+    print("{:<10} | {:<15} | {:<10} | {:<15}".format(xi_rounded, f_xi_rounded, xi_rounded, f_xi_rounded))
+    print("{:<10} | {:<15} | {:<10} | {:<15}".format(xi_minus_rounded, f_xi_minus_rounded, xi_minus_h2_rounded, f_xi_minus_h2_rounded))
+    print("\nTruncated Derivative for h1: ", D_h1_rounded)
+    print("\nTruncated Derivative for h2: ", D_h2_rounded)
+    print("\nRichardson's Extrapolated D: ", D_rounded)
+    print("\n")
+
+if __name__ == "__main__":
+    cdd_richardsons_extrapolation_main()
